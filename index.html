@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quer namorar comigo?</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            width: 50%;
+            height: 50%;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .buttons {
+            position: relative;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #yes {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #yes:hover {
+            background-color: #45a049;
+        }
+
+        #no {
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quer namorar comigo?</h1>
+        <div class="buttons">
+            <button id="yes" onclick="showLoveMessage()">Sim</button>
+            <button id="no">Não</button>
+        </div>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('no');
+        const container = document.querySelector('.container');
+
+        noButton.addEventListener('mouseover', () => {
+            let randomX, randomY;
+            do {
+                const maxX = container.offsetWidth * 0.4 - noButton.offsetWidth;
+                const maxY = container.offsetHeight * 0.4 - noButton.offsetHeight;
+
+                randomX = Math.random() * maxX + container.offsetWidth * 0.3;
+                randomY = Math.random() * maxY + container.offsetHeight * 0.3;
+
+                const currentLeft = parseFloat(noButton.style.left || 0);
+                const currentTop = parseFloat(noButton.style.top || 0);
+
+                if (Math.abs(randomX - currentLeft) > 10 || Math.abs(randomY - currentTop) > 10) {
+                    break;
+                }
+            } while (true);
+
+            noButton.style.left = `${randomX}px`;
+            noButton.style.top = `${randomY}px`;
+        });
+
+        function showLoveMessage() {
+            document.body.innerHTML = '<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh; text-align: center; font-family: Arial, sans-serif; background-color: #f9f9f9;"><h1 style="font-size: 2.5rem; color: #333;">Eu te amo, nós para sempre <3</h1></div>';
+        }
+    </script>
+</body>
+</html>
